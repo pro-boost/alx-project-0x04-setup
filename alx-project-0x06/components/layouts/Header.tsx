@@ -1,11 +1,12 @@
 import Link from "next/link";
 import Button from "../common/Button";
 import { usePathname } from "next/navigation";
-import { useCount } from "@/context/CountContext";
+import { RootState } from "@/store/store";
+import { useSelector } from "react-redux";
 
 const Header: React.FC = () => {
   const pathname = usePathname();
-  const { count } = useCount();
+  const count = useSelector((state: RootState) => state.counter.value);
 
   return (
     <header className="fixed w-full bg-white shadow-md">
@@ -25,9 +26,7 @@ const Header: React.FC = () => {
               <Button buttonLabel="Sign Up" buttonBackgroundColor="blue" />
             </>
           ) : (
-            <p className=" font-semibold text-lg text-black">
-              Current count : {count}
-            </p>
+            <p className=" font-semibold text-lg">Current count : {count}</p>
           )}
         </div>
       </div>
